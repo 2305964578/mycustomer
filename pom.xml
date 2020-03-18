@@ -5,6 +5,7 @@
     <modules>
         <module>customer-common</module>
         <module>web-app</module>
+        <module>customer-management</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
