@@ -14,20 +14,6 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    @Autowired
-    CustomerService customerService;
 
 
-
-    //查询全部
-    @GetMapping("get_customer")
-    public List<Customer> getCustomer(){
-        return this.customerService.selectCustomer();
-    }
-
-    //根据id查询
-    @GetMapping("/get_id")
-    public Customer selectByPrimaryKey(Integer id) {
-        return this.customerService.selectByPrimaryKey(id);
-    }
 }
