@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.google</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>customer-common</artifactId>
             <version>1.0.1</version>
         </dependency>
     </dependencies>
