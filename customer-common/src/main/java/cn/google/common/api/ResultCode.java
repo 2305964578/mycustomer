@@ -11,7 +11,7 @@ public enum  ResultCode {
 
 
 
-    SUCCESS(HttpServletResponse.SC_OK,"操作成功"),
+    SUCCESS(HttpServletResponse.SC_OK,"成功"),
     FAILURE(HttpServletResponse.SC_BAD_REQUEST,"错误的请求"),
     MSG_TYPE_READABLE(HttpServletResponse.SC_BAD_REQUEST,"消息无法读取"),
     PARAM_TYPE_ERROR(HttpServletResponse.SC_BAD_REQUEST,"参数类型错误"),

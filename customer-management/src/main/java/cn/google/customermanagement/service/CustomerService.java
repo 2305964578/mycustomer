@@ -13,6 +13,7 @@ public class CustomerService {
 
     @Autowired
     CustomerMapper customerMapper;
+
     public List<Customer> selectCustomer(){
         return this.customerMapper.selectCustomer();
     }
