@@ -14,6 +14,4 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-
-
 }
