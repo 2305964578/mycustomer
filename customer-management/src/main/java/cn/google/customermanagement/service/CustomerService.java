@@ -16,4 +16,8 @@ public class CustomerService {
     public List<Customer> selectCustomer(){
         return this.customerMapper.selectCustomer();
     }
+
+    public Customer selectByPrimaryKey(Integer id){
+        return this.customerMapper.selectByPrimaryKey(id);
+    }
 }

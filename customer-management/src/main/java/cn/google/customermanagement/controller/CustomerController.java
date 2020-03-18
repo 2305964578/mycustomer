@@ -24,4 +24,10 @@ public class CustomerController {
     public List<Customer> getCustomer(){
         return this.customerService.selectCustomer();
     }
+
+    //根据id查询
+    @GetMapping("/get_id")
+    public Customer selectByPrimaryKey(Integer id) {
+        return this.customerService.selectByPrimaryKey(id);
+    }
 }
