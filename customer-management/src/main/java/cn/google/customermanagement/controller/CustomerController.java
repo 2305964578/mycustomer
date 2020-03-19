@@ -1,10 +1,13 @@
 package cn.google.customermanagement.controller;
 
+import cn.google.common.api.BaseResponse;
 import cn.google.common.api.ListResponse;
 import cn.google.common.api.ObjResponse;
+import cn.google.customermanagement.model.Customer;
 import cn.google.customermanagement.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,5 +33,18 @@ public class CustomerController {
 //        return this.customerService.selectByPrimaryKey(id);
         return new ObjResponse(this.customerService.selectByPrimaryKey(id));
     }
-    //
+    //修改
+    @PostMapping("/customer_update")
+    public ObjResponse updateByPrimaryKey(Customer record){
+        ObjResponse objResponse =new ObjResponse(this.customerService.updateByPrimaryKey(record));
+
+        return objResponse;
+    }
+
+    //添加
+    @PostMapping("/add")
+    public ObjResponse insertSelective(Customer record){
+        ObjResponse objResponse =new ObjResponse(this.customerService.insertSelective(record));
+        return objResponse;
+    }
 }

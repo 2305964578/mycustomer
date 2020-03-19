@@ -5,14 +5,20 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
 @Mapper
 @Repository
 public interface CustomerMapper {
+    int deleteByPrimaryKey(Integer customerId);
 
+    int insert(Customer record);
+
+    int insertSelective(Customer record);
     //根据id查询
-    public Customer selectByPrimaryKey(Integer customerId);
+    Customer selectByPrimaryKey(Integer customerId);
     //查询全部
     public List<Customer> selectCustomer();
 
+    int updateByPrimaryKeySelective(Customer record);
+
+    int updateByPrimaryKey(Customer record);
 }
