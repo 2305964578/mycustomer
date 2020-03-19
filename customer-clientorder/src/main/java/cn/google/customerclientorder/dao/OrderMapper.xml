@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.google.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="cn.google.model.Order">
+    <id column="Order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="commodity_id" jdbcType="INTEGER" property="commodityId" />
+    <result column="Order_Number" jdbcType="INTEGER" property="orderNumber" />
+    <result column="Transaction_time" jdbcType="TIMESTAMP" property="transactionTime" />
+    <result column="Place_of_transaction" jdbcType="VARCHAR" property="placeOfTransaction" />
+    <result column="Trading_status" jdbcType="INTEGER" property="tradingStatus" />
+    <result column="Order_Remarks" jdbcType="VARCHAR" property="orderRemarks" />
+    <result column="Order_completion_time" jdbcType="TIMESTAMP" property="orderCompletionTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Order_id, customer_id, commodity_id, Order_Number, 
+Transaction_time, Place_of_transaction, 
+    Trading_status, Order_Remarks, Order_completion_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where Order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+
+    <select id="selectByCustomerId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from order
+        where customer_id = #{customerId,jdbcType=INTEGER}
+    </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where Order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.google.model.Order">
+    insert into order (customer_id, commodity_id,
+      Order_Number, 
+Transaction_time, Place_of_transaction, 
+      Trading_status, Order_Remarks, Order_completion_time
+      )
+    values (#{customerId,jdbcType=INTEGER}, #{commodityId,jdbcType=INTEGER},
+      #{orderNumber,jdbcType=INTEGER}, #{
+transactionTime,jdbcType=TIMESTAMP}, #{placeOfTransaction,jdbcType=VARCHAR}, 
+      #{tradingStatus,jdbcType=INTEGER}, #{orderRemarks,jdbcType=VARCHAR}, #{orderCompletionTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.google.model.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        Order_id,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="orderNumber != null">
+        Order_Number,
+      </if>
+      <if test="
+transactionTime != null">
+        
+Transaction_time,
+      </if>
+      <if test="placeOfTransaction != null">
+        Place_of_transaction,
+      </if>
+      <if test="tradingStatus != null">
+        Trading_status,
+      </if>
+      <if test="orderRemarks != null">
+        Order_Remarks,
+      </if>
+      <if test="orderCompletionTime != null">
+        Order_completion_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="
+transactionTime != null">
+        #{
+transactionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="placeOfTransaction != null">
+        #{placeOfTransaction,jdbcType=VARCHAR},
+      </if>
+      <if test="tradingStatus != null">
+        #{tradingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderRemarks != null">
+        #{orderRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCompletionTime != null">
+        #{orderCompletionTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.google.model.Order">
+    update order
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null">
+        Order_Number = #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="
+transactionTime != null">
+        
+Transaction_time = #{
+transactionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="placeOfTransaction != null">
+        Place_of_transaction = #{placeOfTransaction,jdbcType=VARCHAR},
+      </if>
+      <if test="tradingStatus != null">
+        Trading_status = #{tradingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderRemarks != null">
+        Order_Remarks = #{orderRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCompletionTime != null">
+        Order_completion_time = #{orderCompletionTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.google.model.Order">
+    update order
+    set customer_id = #{customerId,jdbcType=INTEGER},
+      commodity_id = #{commodityId,jdbcType=INTEGER},
+      Order_Number = #{orderNumber,jdbcType=INTEGER},
+      
+Transaction_time = #{
+transactionTime,jdbcType=TIMESTAMP},
+      Place_of_transaction = #{placeOfTransaction,jdbcType=VARCHAR},
+      Trading_status = #{tradingStatus,jdbcType=INTEGER},
+      Order_Remarks = #{orderRemarks,jdbcType=VARCHAR},
+      Order_completion_time = #{orderCompletionTime,jdbcType=TIMESTAMP}
+    where Order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>
