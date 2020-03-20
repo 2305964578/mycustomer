@@ -1,5 +1,7 @@
 package cn.google.customerclientorder.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Order {
@@ -11,7 +13,8 @@ public class Order {
 
     private Integer orderNumber;
 
-    private Date transactionTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date tradingHour;
 
     private String placeOfTransaction;
 
@@ -19,6 +22,7 @@ public class Order {
 
     private String orderRemarks;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date orderCompletionTime;
 
     public Integer getOrderId() {
@@ -53,16 +57,12 @@ public class Order {
         this.orderNumber = orderNumber;
     }
 
-    public Date gettransactionTime() {
-        return
-                transactionTime;
+    public Date getTradingHour() {
+        return tradingHour;
     }
 
-    public void settransactionTime(Date
-                            transactionTime) {
-        this.
-                transactionTime =
-                transactionTime;
+    public void setTradingHour(Date tradingHour) {
+        this.tradingHour = tradingHour;
     }
 
     public String getPlaceOfTransaction() {

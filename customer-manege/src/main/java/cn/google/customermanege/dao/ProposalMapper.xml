@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.google.customermanege.dao.ProposalMapper">
+  <resultMap id="BaseResultMap" type="cn.google.customermanege.model.Proposal">
+    <id column="proposal_id" jdbcType="INTEGER" property="proposalId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="proposal_content" jdbcType="VARCHAR" property="proposalContent" />
+    <result column="proposal_time" jdbcType="VARCHAR" property="proposalTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    proposal_id, user_id, proposal_content, proposal_time
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from proposal
+    where proposal_id = #{proposalId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByTime" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from proposal
+    where proposal_time = #{proposalTime,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from proposal
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from proposal
+    where proposal_id = #{proposalId,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="cn.google.customermanege.model.Proposal">
+    insert into proposal (user_id, proposal_content,
+      proposal_time)
+    values (#{userId,jdbcType=INTEGER}, #{proposalContent,jdbcType=VARCHAR},
+      #{proposalTime,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="cn.google.customermanege.model.Proposal">
+    insert into proposal
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="proposalId != null">
+        proposal_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="proposalContent != null">
+        proposal_content,
+      </if>
+      <if test="proposalTime != null">
+        proposal_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="proposalId != null">
+        #{proposalId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="proposalContent != null">
+        #{proposalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="proposalTime != null">
+        #{proposalTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="cn.google.customermanege.model.Proposal">
+    update proposal
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="proposalContent != null">
+        proposal_content = #{proposalContent,jdbcType=VARCHAR},
+      </if>
+      <if test="proposalTime != null">
+        proposal_time = #{proposalTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where proposal_id = #{proposalId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="cn.google.customermanege.model.Proposal">
+    update proposal
+    set user_id = #{userId,jdbcType=INTEGER},
+      proposal_content = #{proposalContent,jdbcType=VARCHAR},
+      proposal_time = #{proposalTime,jdbcType=VARCHAR}
+    where proposal_id = #{proposalId,jdbcType=INTEGER}
+  </update>
+</mapper>

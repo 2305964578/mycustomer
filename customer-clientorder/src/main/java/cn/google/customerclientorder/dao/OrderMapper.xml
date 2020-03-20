@@ -1,55 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.google.dao.OrderMapper">
-  <resultMap id="BaseResultMap" type="cn.google.model.Order">
+<mapper namespace="cn.google.customerclientorder.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="cn.google.customerclientorder.model.Order">
     <id column="Order_id" jdbcType="INTEGER" property="orderId" />
     <result column="customer_id" jdbcType="INTEGER" property="customerId" />
     <result column="commodity_id" jdbcType="INTEGER" property="commodityId" />
     <result column="Order_Number" jdbcType="INTEGER" property="orderNumber" />
-    <result column="Transaction_time" jdbcType="TIMESTAMP" property="transactionTime" />
+    <result column="trading_hour" jdbcType="TIMESTAMP" property="tradingHour" />
     <result column="Place_of_transaction" jdbcType="VARCHAR" property="placeOfTransaction" />
     <result column="Trading_status" jdbcType="INTEGER" property="tradingStatus" />
     <result column="Order_Remarks" jdbcType="VARCHAR" property="orderRemarks" />
     <result column="Order_completion_time" jdbcType="TIMESTAMP" property="orderCompletionTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    Order_id, customer_id, commodity_id, Order_Number, 
-Transaction_time, Place_of_transaction, 
+    Order_id, customer_id, commodity_id, Order_Number, trading_hour, Place_of_transaction,
     Trading_status, Order_Remarks, Order_completion_time
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from order
+    *
+    from `order`
     where Order_id = #{orderId,jdbcType=INTEGER}
   </select>
 
     <select id="selectByCustomerId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
-        from order
+       *
+        from `order`
         where customer_id = #{customerId,jdbcType=INTEGER}
     </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from `order`
     where Order_id = #{orderId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.google.model.Order">
-    insert into order (customer_id, commodity_id,
-      Order_Number, 
-Transaction_time, Place_of_transaction, 
+  <insert id="insert" parameterType="cn.google.customerclientorder.model.Order">
+    insert into `order` (customer_id, commodity_id,
+      Order_Number, trading_hour, Place_of_transaction,
       Trading_status, Order_Remarks, Order_completion_time
       )
     values (#{customerId,jdbcType=INTEGER}, #{commodityId,jdbcType=INTEGER},
       #{orderNumber,jdbcType=INTEGER}, #{
-transactionTime,jdbcType=TIMESTAMP}, #{placeOfTransaction,jdbcType=VARCHAR}, 
+tradingHour,jdbcType=TIMESTAMP}, #{placeOfTransaction,jdbcType=VARCHAR},
       #{tradingStatus,jdbcType=INTEGER}, #{orderRemarks,jdbcType=VARCHAR}, #{orderCompletionTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.google.model.Order">
-    insert into order
+  <insert id="insertSelective" parameterType="cn.google.customerclientorder.model.Order">
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
         Order_id,
@@ -64,9 +62,9 @@ transactionTime,jdbcType=TIMESTAMP}, #{placeOfTransaction,jdbcType=VARCHAR},
         Order_Number,
       </if>
       <if test="
-transactionTime != null">
-        
-Transaction_time,
+tradingHour != null">
+
+          trading_hour,
       </if>
       <if test="placeOfTransaction != null">
         Place_of_transaction,
@@ -95,9 +93,9 @@ Transaction_time,
         #{orderNumber,jdbcType=INTEGER},
       </if>
       <if test="
-transactionTime != null">
+tradingHour != null">
         #{
-transactionTime,jdbcType=TIMESTAMP},
+tradingHour,jdbcType=TIMESTAMP},
       </if>
       <if test="placeOfTransaction != null">
         #{placeOfTransaction,jdbcType=VARCHAR},
@@ -113,8 +111,8 @@ transactionTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.google.model.Order">
-    update order
+  <update id="updateByPrimaryKeySelective" parameterType="cn.google.customerclientorder.model.Order">
+    update `order`
     <set>
       <if test="customerId != null">
         customer_id = #{customerId,jdbcType=INTEGER},
@@ -126,10 +124,10 @@ transactionTime,jdbcType=TIMESTAMP},
         Order_Number = #{orderNumber,jdbcType=INTEGER},
       </if>
       <if test="
-transactionTime != null">
-        
-Transaction_time = #{
-transactionTime,jdbcType=TIMESTAMP},
+tradingHour != null">
+
+          trading_hour = #{
+tradingHour,jdbcType=TIMESTAMP},
       </if>
       <if test="placeOfTransaction != null">
         Place_of_transaction = #{placeOfTransaction,jdbcType=VARCHAR},
@@ -146,14 +144,14 @@ transactionTime,jdbcType=TIMESTAMP},
     </set>
     where Order_id = #{orderId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.google.model.Order">
-    update order
+  <update id="updateByPrimaryKey" parameterType="cn.google.customerclientorder.model.Order">
+    update `order`
     set customer_id = #{customerId,jdbcType=INTEGER},
       commodity_id = #{commodityId,jdbcType=INTEGER},
       Order_Number = #{orderNumber,jdbcType=INTEGER},
       
-Transaction_time = #{
-transactionTime,jdbcType=TIMESTAMP},
+trading_hour = #{
+tradingHour,jdbcType=TIMESTAMP},
       Place_of_transaction = #{placeOfTransaction,jdbcType=VARCHAR},
       Trading_status = #{tradingStatus,jdbcType=INTEGER},
       Order_Remarks = #{orderRemarks,jdbcType=VARCHAR},
